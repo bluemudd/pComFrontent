@@ -84,11 +84,7 @@ export default {
         good: "추천",
         id: this.$route.params.id,
         body: [],
-        comment: '',
-      contents: [
-        { nickname: "까미", title: 'ABC', opinion: 'Good', id: 1 , replyCount: 1, createDate:"2023-01-03",
-            content: "[영등포신문=신민수 기자] 서울지방병무청(청장 김주영)은 최근 사이버상에서 증가하는 병역면탈 조장정보를 차단하여 공정하고 정의로운 병역이행 문화를 조성하기 위해‘병역면탈 조장정보 시민감시단’을 모집한다고 밝혔다."},  
-      ]
+        comment: ''
     }
   },
     created(){
