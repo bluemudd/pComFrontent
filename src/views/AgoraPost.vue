@@ -20,8 +20,20 @@
         >
   
         </v-textarea>
+        <!-- <v-row>
+          <v-col>
+            <v-file-input class="input" type="file" counter show-size label="이미지 제출(여러개 가능)"
+                outlined dense multiple prepend-icon="mdi-camera" style="width: 400px; margin-left: 100px;"
+                @change="onImageChange"/>
+          </v-col>
+        </v-row>
+        <v-row>
+
+        </v-row> -->
         <v-btn class="float-right" color="primary" @click="createBoard">글쓰기</v-btn>
-  
+       
+        <!-- <v-img v-for="(item, i) in imagelist" :key="i" :src="require(`../../../node-back/uploads/${item}`)"
+       contain height="150px" width="200px" style="border: 2px solid black; margin-left:100px;"/> -->
       </v-container>
     </v-app>
   
@@ -36,6 +48,8 @@
           title: '',
           contents: ''
         },
+        uploadimageurl: [],    // 업로드한 이미지의 미리보기 기능을 위해 url 저장하는 객체
+        imagecnt: 0,        // 업로드한 이미지 개수 => 제출버튼 클릭시 back서버와 axios 통신하게 되는데, 이 때 이 값도 넘겨줌
         rules: {
           titleRules: [],
           contentRules: []
@@ -53,6 +67,22 @@
                 console.log(error);
             }
             this.$router.push({name:'Agora'})
+
+        },
+        onImageChange(file){
+          if(!file){
+            return;
+          }
+          const formData = new FormDate();
+          this.uploadimageurl = [];
+          file.forEach((item)=>{
+            formData.append('filelist',item)
+            const reader = new FileReader();
+            read.onload = (e)=>{
+              this.uploadimageurl.push({url: e.target.result});
+            };
+            reader.readAsDataURL(item);
+          });
 
         },
         setRules() {
